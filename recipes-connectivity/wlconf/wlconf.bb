@@ -2,6 +2,8 @@ DESCRIPTION = "Configuration utility for TI wireless drivers"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://README;beginline=1;endline=21;md5=adc05a1903d3f107f85c90328e3a9438"
 
+DEPENDS = "dos2unix-native"
+
 PV = "R8.7_SP2"
 
 # Tag: R8.7_SP2
