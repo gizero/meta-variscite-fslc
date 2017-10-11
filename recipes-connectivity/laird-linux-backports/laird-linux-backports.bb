@@ -3,30 +3,21 @@ SECTION = "kernel/modules"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
 
-RDEPENDS_${PN} = "wireless-tools"
-
 PV = "3.5.5.8"
 inherit module
 
 SRCREV = "e82ec335896e1becca0ce9d0d2a4dedc9106216b"
-BRANCH = "3.5.5.8"
+BRANCH = "${PV}"
 
-SRC_URI = "git://github.com/varigit/laird-linux-backports.git;protocol=git;branch=${BRANCH}"
+SRC_URI = "git://github.com/varigit/laird-linux-backports.git;protocol=git;branch=${BRANCH} \
+	   file://0001-Makefile.real-skip-the-depmod-magic.patch"
 
-export KLIB_BUILD="${STAGING_KERNEL_BUILDDIR}"
-export KLIB="${D}"
+S = "${WORKDIR}/git"
+
+EXTRA_OEMAKE = "KLIB_BUILD=${STAGING_KERNEL_BUILDDIR} KLIB=${D}"
 
 do_configure() {
-    cd ${WORKDIR}/git
-    CC=gcc make defconfig-lwb-fcc-var
+    oe_runmake 'CC=${BUILD_CC}' defconfig-lwb-fcc-var
 }
 
-do_compile() {
-    cd ${WORKDIR}/git
-    oe_runmake
-}
-
-do_install() {
-    cd ${WORKDIR}/git
-    oe_runmake INSTALL_MOD_PATH="${D}" modules_install
-}
+RDEPENDS_${PN} = "wireless-tools"
