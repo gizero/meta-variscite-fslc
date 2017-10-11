@@ -1,0 +1,27 @@
+From 1898d96a3b7fe41e9f82803eca276db70c7d640d Mon Sep 17 00:00:00 2001
+From: Andrea Galbusera <gizero@gmail.com>
+Date: Wed, 11 Oct 2017 10:14:39 +0000
+Subject: [PATCH] Makefile.real: skip the depmod magic
+
+module.bbclass will take care of it in a clean way
+---
+ Makefile.real | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/Makefile.real b/Makefile.real
+index c874d31..6d2f83e 100644
+--- a/Makefile.real
++++ b/Makefile.real
+@@ -94,9 +94,6 @@ install: modules
+ 		modules_install
+ 	@./scripts/blacklist.sh $(KLIB)/ $(KLIB)/$(KMODDIR)
+ 	@./scripts/compress_modules.sh $(KLIB)/$(KMODDIR)
+-	@./scripts/check_depmod.sh
+-	@/sbin/depmod -a
+-	@./scripts/update-initramfs.sh $(KLIB)
+ 	@echo
+ 	@echo Your backported driver modules should be installed now.
+ 	@echo Reboot.
+-- 
+2.7.4
+
