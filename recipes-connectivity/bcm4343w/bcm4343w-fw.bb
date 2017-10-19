@@ -14,6 +14,8 @@ BRANCH = "3.5.5.18"
 SRC_URI = "git://github.com/varigit/bcm_4343w_fw.git;protocol=git;branch=${BRANCH}"
 SRCREV = "423be46b06b5629e45a4943f98a3053c819091ce"
 
+inherit allarch
+
 do_install() {
 	install -d ${D}/lib/firmware/brcm
 	install -d ${D}/lib/firmware/bcm
