@@ -27,3 +27,10 @@ do_install() {
 
 FILES_${PN} =  "/lib/firmware/brcm/*"
 FILES_${PN} += "/lib/firmware/bcm/*"
+
+ALTERNATIVE_bcm4343w-fw = "brcmfmac43430-sdio.bin"
+ALTERNATIVE_TARGET_bcm4343w-fw[brcmfmac43430-sdio.bin] = "/lib/firmware/brcm/brcmfmac43430-sdio.bin"
+#ALTERNATIVE_PRIORITY_bcm4343w-fw[brcmfmac-sdio.bin] = "40"
+ALTERNATIVE_bcm4343w-fw = "brcmfmac4339-sdio.bin"
+ALTERNATIVE_TARGET_bcm_4343w-fw[brcmfmac4339-sdio.bin] = "/lib/firmware/brcm/brcmfmac4339-sdio.bin"
+#ALTERNATIVE_PRIORITY_bcm_4343w_fw[brcmfmac4339-sdio.bin] = "40"
